@@ -15,3 +15,10 @@ di:
 	export:
 		parameters: no
 		tags: no
+
+
+security:
+	users:
+		admin: cisco  # user 'admin', password 'secret'
+
+

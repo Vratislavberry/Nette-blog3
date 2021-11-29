@@ -56,7 +56,7 @@ final class EditPresenter extends Nette\Application\UI\Presenter
         $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
         $this->redirect('Post:show', $post->id);
 
-        
+
     }
 
     public function renderEdit(int $postId): void
@@ -74,6 +74,14 @@ final class EditPresenter extends Nette\Application\UI\Presenter
     }
 
 
+    public function startup(): void
+    {
+        parent::startup();
+    
+        if (!$this->getUser()->isLoggedIn()) {
+            $this->redirect('Sign:in');
+        }
+    }
     
 
 

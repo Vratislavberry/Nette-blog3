@@ -1,7 +1,8 @@
 {block content}
 
 <p><a href="{link Homepage:default}">← zpět na výpis příspěvků</a></p>
-<a n:href="Edit:edit $post->id">Upravit článek</a>
+{*}<a n:href="Edit:edit $post->id">Upravit článek</a>{*}
+<a n:href="Edit:edit $post->id" n:if="$user->isLoggedIn()">Upravit článek</a>
 
 
 <h1 n:block="title">{$post->title}</h1>
