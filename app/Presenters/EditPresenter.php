@@ -30,14 +30,6 @@ final class EditPresenter extends Nette\Application\UI\Presenter
 
     public function postFormSucceeded(array $values): void
     {
-        /*
-        $post = $this->database
-            ->table('posts')
-            ->insert($values);
-    
-        $this->flashMessage("Příspěvek byl úspěšně publikován.", 'success');
-        $this->redirect('Post:show', $post->id);
-        */
 
         $postId = $this->getParameter('postId');
 

@@ -3,76 +3,50 @@ namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
+use App\Model\PostFacade;
+use App\Model\FormFacade;
 
 final class PostPresenter extends Nette\Application\UI\Presenter
 {
-	private Nette\Database\Explorer $database;
+	
+    private PostFacade $Pfacade;
+    private FormFacade $Ffacade;
 
-	public function __construct(Nette\Database\Explorer $database)
+    public function __construct(PostFacade $Pfacade, FormFacade $Ffacade)
 	{
-		$this->database = $database;
+        // Připojení facade k databazi
+		$this->Pfacade = $Pfacade;
+        $this->Ffacade = $Ffacade;
 	}
 
-	public function renderShow(int $postId): void
+    public function renderShow(int $postId): void
 	{
-        /*
-		$this->template->post = $this->database
-			->table('posts')
-			->get($postId);
-        */
-        $post = $this->database
-            ->table('posts')
-            ->get($postId);
-        if (!$post) 
-        {
-            $this->error('Stránka nebyla nalezena');
-        }
+        $this->template->post = $this->Pfacade
+			->getArticleDetails($postId)[0];
 
-	//$this->template->post = $post;
+        $this->template->comments = $this->Pfacade
+			->getArticleDetails($postId)[1];
+        
 
 
-    $this->template->post = $post;
-	$this->template->comments = $post->related('comments')->order('created_at DESC');
-
-	}
-
-    protected function createComponentCommentForm(): Form
-    {
-        $form = new Form; // means Nette\Application\UI\Form
-    
-        $form->addText('name', 'Jméno:')
-            ->setRequired();
-    
-        $form->addEmail('email', 'E-mail:');
-    
-        $form->addTextArea('content', 'Komentář:')
-            ->setRequired();
-    
-        $form->addSubmit('send', 'Publikovat komentář');
-
-        $form->onSuccess[] = [$this, 'commentFormSucceeded'];
-    
-        return $form;
     }
 
+    public function createComponentCommentForm()
+    {
+        return $this->Ffacade->getCommentForm($this->getParameter("postId"));
+    }
 
-
-    public function commentFormSucceeded(\stdClass $values): void
+/*
+    public function commentFormSucceeded()
     {
         $postId = $this->getParameter('postId');
-
-        $this->database->table('comments')->insert([
-            'post_id' => $postId,
-            'name' => $values->name,
-            'email' => $values->email,
-            'content' => $values->content,
-        ]);
+        $this->Ffacade->addComment($postId);
 
         $this->flashMessage('Děkuji za komentář', 'success');
         $this->redirect('this');
+
     }
-
-
+*/
 
 
 
