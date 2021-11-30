@@ -1,14 +1,18 @@
 {block content}
 
-<p><a href="{link Homepage:default}">← zpět na výpis příspěvků</a></p>
+{*}<p><a href="{link Homepage:default}">← zpět na výpis příspěvků</a></p>{*}
 {*}<a n:href="Edit:edit $post->id">Upravit článek</a>{*}
-<a n:href="Edit:edit $post->id" n:if="$user->isLoggedIn()">Upravit článek</a>
 
 
 <h1 n:block="title">{$post->title}</h1>
-<p>{$post->created_at|date:'j F, Y'}</p>
 
 <p>{$post->content}</p>
+
+
+    <a class="tlacitko" n:href="Edit:edit $post->id" n:if="$user->isLoggedIn()">Upravit článek</a>
+
+
+<p class="datum">{$post->created_at|date:'j F, Y'}</p>
 
 
 <h2>Vložte nový komentář</h2>
@@ -16,7 +20,7 @@
 {control commentForm}
 
 
-<h2>Komentáře</h2>
+<h3>Komentáře</h3>
 
 {foreach $comments as $comment}
 

@@ -1,16 +1,25 @@
 {block content}
 <h1 n:block="title">Náš blog</h1>
 
-{*}<a n:href="Edit:create">Napsat nový článek</a>{*}
-<a n:href="Edit:create $post->id" n:if="$user->isLoggedIn()">Napsat nový článek</a>
+{*}<a n:href="Edit:create">Napsat nový článek</a>
+<a n:href="Edit:create $posts->id" n:if="$user->isLoggedIn()">Napsat nový článek</a>
+{*}
+<a class="tlacitko" n:href="Edit:create" n:if="$user->isLoggedIn()">Vytvořit článek</a>
+<hr>
+    <div class="container">
+        <div class="row">
+            {foreach $posts as $post}
 
-{foreach $posts as $post}
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="p-3 mb-3 border bg-light">
+                        <h2><a href="{link Post:show $post->id}">{$post->title}</a></h2>
 
+                        <p>Created at: {$post->created_at|date:'j F, Y'}</p>
 
-<h2><a href="{link Post:show $post->id}">{$post->title}</a></h2>
-
-<p>Created at: {$post->created_at|date:'j F, Y'}</p>
-
-<p>{$post->content|truncate:256}</p>
-<br>
-{/foreach}
+                        <p>{$post->content|truncate:100}</p>
+                        <br>
+                    </div>
+            </div>
+            {/foreach}
+        </div>
+    </div>
