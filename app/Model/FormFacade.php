@@ -3,6 +3,7 @@ namespace App\Model;
 
 use Nette;
 use Nette\Application\UI\Form;
+use App\Model\PostFacade;
 
 final class FormFacade
 {
@@ -10,10 +11,13 @@ final class FormFacade
 
 	private Nette\Database\Explorer $database;
     private int $postId;
+    private PostFacade $Pfacade;
 
-	public function __construct(Nette\Database\Explorer $database)
+
+	public function __construct(Nette\Database\Explorer $database, PostFacade $Pfacade)
 	{
 		$this->database = $database;
+        $this->Pfacade = $Pfacade;
 	}
 
 
@@ -31,14 +35,17 @@ public function getCommentForm(int $postId): Form
     
         $form->addSubmit('send', 'Publikovat komentář');
 
+        
+        $form->addHidden('postId', $postId);
 
-        $this->postId = $postId;
+        
 
-        $form->onSuccess[] = [$this, 'addComment'];
+        $form->onSuccess[] = [$this->Pfacade, 'addComment'];
     
         return $form;
     }
-	
+
+/*
 	public function addComment(\stdClass $values): void
     {
 
@@ -49,5 +56,5 @@ public function getCommentForm(int $postId): Form
             'content' => $values->content,
         ]);
 	}
-
+*/
 }

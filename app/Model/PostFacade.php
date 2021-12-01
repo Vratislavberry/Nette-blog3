@@ -3,16 +3,19 @@ namespace App\Model;
 
 use Nette;
 use Nette\Application\UI\Form;
+//use App\Model\FormFacade;
 
 final class PostFacade
 {
 	use Nette\SmartObject;
 
 	private Nette\Database\Explorer $database;
+	//private FormFacade $Ffacade;
 
-	public function __construct(Nette\Database\Explorer $database)
+	public function __construct(Nette\Database\Explorer $database/*, FormFacade $Ffacade*/)
 	{
 		$this->database = $database;
+		//$this->Ffacade = $Ffacade;
 	}
 
 	// Vrati celou tabulku posts nejak filtrovane.
@@ -42,6 +45,16 @@ final class PostFacade
 		return [$post, $post->related('comments')->order('created_at DESC')];
 	}
 
+	public function addComment(\stdClass $values): void
+    {
+
+        $this->database->table('comments')->insert([
+            'post_id' => $values->postId,
+            'name' => $values->name,
+            'email' => $values->email,
+            'content' => $values->content,
+        ]);
+	}
 
 
 	

@@ -3,17 +3,21 @@ namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
+use App\Model\PostFacade;
+use App\Model\FormFacade;
 
 final class EditPresenter extends Nette\Application\UI\Presenter
 {
-	private Nette\Database\Explorer $database;
+    private Nette\Database\Explorer $database;
 
 	public function __construct(Nette\Database\Explorer $database)
 	{
+        // Připojení facade k databazi
+
 		$this->database = $database;
 	}
 
-/*
+
     protected function createComponentPostForm(): Form
     {
         $form = new Form;
@@ -27,6 +31,12 @@ final class EditPresenter extends Nette\Application\UI\Presenter
 
         return $form;
     }
+
+
+
+
+
+
 
     public function postFormSucceeded(array $values): void
     {
@@ -50,7 +60,7 @@ final class EditPresenter extends Nette\Application\UI\Presenter
 
 
     }
-*/
+
 
     public function renderEdit(int $postId): void
     {
@@ -64,7 +74,8 @@ final class EditPresenter extends Nette\Application\UI\Presenter
     
         $this->getComponent('postForm')
             ->setDefaults($post->toArray());
-    }
+    
+        }
 
 
     public function startup(): void

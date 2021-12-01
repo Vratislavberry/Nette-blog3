@@ -45,7 +45,7 @@ final class PostPresenter extends Nette\Application\UI\Presenter
         return $this->Ffacade->getCommentForm($this->getParameter("postId"));
     }
 
-/*
+
     public function commentFormSucceeded()
     {
         $postId = $this->getParameter('postId');
@@ -55,7 +55,7 @@ final class PostPresenter extends Nette\Application\UI\Presenter
         $this->redirect('this');
 
     }
-*/
+
 
 
 
