@@ -13,7 +13,7 @@ final class EditPresenter extends Nette\Application\UI\Presenter
 		$this->database = $database;
 	}
 
-
+/*
     protected function createComponentPostForm(): Form
     {
         $form = new Form;
@@ -50,6 +50,7 @@ final class EditPresenter extends Nette\Application\UI\Presenter
 
 
     }
+*/
 
     public function renderEdit(int $postId): void
     {

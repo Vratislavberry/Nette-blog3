@@ -21,11 +21,20 @@ final class PostPresenter extends Nette\Application\UI\Presenter
 
     public function renderShow(int $postId): void
 	{
-        $this->template->post = $this->Pfacade
-			->getArticleDetails($postId)[0];
+        $articleDetails = $this->Pfacade
+        ->getArticleDetails($postId);
 
-        $this->template->comments = $this->Pfacade
-			->getArticleDetails($postId)[1];
+        if (!isset($articleDetails[1])){
+            $this->error('Stránka nebyla nalezena');
+        }
+        else{
+
+            $this->template->post = $articleDetails[0];
+
+            $this->template->comments = $articleDetails[1];
+        }
+
+        
         
 
 

@@ -35,7 +35,8 @@ final class PostFacade
             ->get($postId);
         if (!$post) 
         {
-            $this->error('Stránka nebyla nalezena');
+            return [$post];
+			//$this->error('Stránka nebyla nalezena');
         }
 
 		return [$post, $post->related('comments')->order('created_at DESC')];
