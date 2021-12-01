@@ -12,11 +12,15 @@ final class PostPresenter extends Nette\Application\UI\Presenter
     private PostFacade $Pfacade;
     private FormFacade $Ffacade;
 
-    public function __construct(PostFacade $Pfacade, FormFacade $Ffacade)
+    private ICommentFormFactory $commentFormFactory;
+
+    public function __construct(PostFacade $Pfacade, FormFacade $Ffacade, ICommentFormFactory $commentFormFactory)
 	{
         // Připojení facade k databazi
 		$this->Pfacade = $Pfacade;
         $this->Ffacade = $Ffacade;
+
+        $this->commentFormFactory = $commentFormFactory;
 	}
 
     public function renderShow(int $postId): void
@@ -42,7 +46,18 @@ final class PostPresenter extends Nette\Application\UI\Presenter
 
     public function createComponentCommentForm()
     {
-        return $this->Ffacade->getCommentForm($this->getParameter("postId"));
+
+        $service = $this->commentFormFactory->create($this->getParameter("postId"));
+
+        $service['form']->onSuccess[] = function(){
+            $this->presenter->redirect('Default:default');
+        };
+        $service->getComponent('form');
+
+        return $service;
+
+
+        //return $this->Ffacade->getCommentForm($this->getParameter("postId"));
         /*$temp = $this->Ffacade->getCommentForm($this->getParameter("postId"));
         $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
         $this->redirect('Post:show', $post->id);
@@ -50,4 +65,4 @@ final class PostPresenter extends Nette\Application\UI\Presenter
     }
 
 }
-
+// Interface = šablona pro třídy

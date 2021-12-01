@@ -59,7 +59,7 @@ final class PostFacade
 
 
 
-	public function addArticle(/*array $values*/\stdClass $values): void
+	public function addArticle(\stdClass $values): void
     {
 
         if ($values->postId != 0) {

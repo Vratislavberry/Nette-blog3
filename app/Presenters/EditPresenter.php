@@ -22,21 +22,7 @@ final class EditPresenter extends Nette\Application\UI\Presenter
 
 	}
 
-/*
-    protected function createComponentPostForm(): Form
-    {
-        $form = new Form;
-        $form->addText('title', 'Titulek:')
-            ->setRequired();
-        $form->addTextArea('content', 'Obsah:')
-            ->setRequired();
 
-        $form->addSubmit('send', 'Uložit a publikovat');
-        $form->onSuccess[] = [$this, 'postFormSucceeded'];
-
-        return $form;
-    }
-*/
 
     public function createComponentPostForm(): Form
     {
@@ -46,40 +32,6 @@ final class EditPresenter extends Nette\Application\UI\Presenter
         else
             return $this->Ffacade->getNewArticleForm();
     }
-
-
-
-
-/*
-    public function postFormSucceeded(array $values): void
-    {
-
-        $postId = $this->getParameter('postId');
-
-        if ($postId) {
-            $post = $this->database
-                ->table('posts')
-                ->get($postId);
-            $post->update($values);
-    
-        } else {
-            $post = $this->database
-                ->table('posts')
-                ->insert($values);
-        }
-    
-        $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
-        $this->redirect('Post:show', $post->id);
-
-
-    }
-
-*/
-
-
-
-
-
 
 
 
