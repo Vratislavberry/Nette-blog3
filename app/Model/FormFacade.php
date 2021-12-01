@@ -21,7 +21,7 @@ final class FormFacade
 	}
 
 
-public function getCommentForm(int $postId): Form
+    public function getCommentForm(int $postId): Form
     {
         $form = new Form; // means Nette\Application\UI\Form
     
@@ -45,16 +45,30 @@ public function getCommentForm(int $postId): Form
         return $form;
     }
 
-/*
-	public function addComment(\stdClass $values): void
-    {
 
-        $this->database->table('comments')->insert([
-            'post_id' => $this->postId,
-            'name' => $values->name,
-            'email' => $values->email,
-            'content' => $values->content,
-        ]);
-	}
-*/
+
+    public function getNewArticleForm(int $postId = 0): Form
+    {
+        $form = new Form;
+        $form->addText('title', 'Titulek:')
+            ->setRequired();
+        $form->addTextArea('content', 'Obsah:')
+            ->setRequired();
+
+        $form->addSubmit('send', 'Uložit a publikovat');
+
+
+       $form->addHidden('postId', $postId);
+
+
+        $form->onSuccess[] = [$this->Pfacade, 'addArticle'];
+
+
+        return $form;
+    }
+
+
+
+
+
 }

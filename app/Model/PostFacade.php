@@ -57,6 +57,31 @@ final class PostFacade
 	}
 
 
+
+
+	public function addArticle(/*array $values*/\stdClass $values): void
+    {
+
+        if ($values->postId != 0) {
+            $post = $this->database
+                ->table('posts')
+                ->get($values->postId);
+            $post->update($values);
+    
+        } else {
+            $post = $this->database
+                ->table('posts')
+                ->insert([
+					'title' => $values->title,
+					'content' => $values->content,
+				]);
+        }
+    
+        $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
+        $this->redirect('Post:show', $values->postId);
+
+
+    }
 	
 
 }
