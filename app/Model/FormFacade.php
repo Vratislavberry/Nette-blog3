@@ -58,7 +58,7 @@ final class FormFacade
         $form->addSubmit('send', 'Uložit a publikovat');
 
 
-       $form->addHidden('postId', $postId);
+        $form->addHidden('postId', $postId);
 
 
         $form->onSuccess[] = [$this->Pfacade, 'addArticle'];

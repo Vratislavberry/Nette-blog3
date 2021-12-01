@@ -66,7 +66,10 @@ final class PostFacade
             $post = $this->database
                 ->table('posts')
                 ->get($values->postId);
-            $post->update($values);
+            $post->update([
+				'title' => $values->title,
+				'content' => $values->content,
+			]);
     
         } else {
             $post = $this->database
@@ -76,9 +79,8 @@ final class PostFacade
 					'content' => $values->content,
 				]);
         }
-    
         //$this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
-        $this->redirect('Post:show', $values->postId);
+        //$this->redirect('Post:show', $values->postId);
 
 
     }

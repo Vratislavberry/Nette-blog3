@@ -43,21 +43,11 @@ final class PostPresenter extends Nette\Application\UI\Presenter
     public function createComponentCommentForm()
     {
         return $this->Ffacade->getCommentForm($this->getParameter("postId"));
+        /*$temp = $this->Ffacade->getCommentForm($this->getParameter("postId"));
+        $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
+        $this->redirect('Post:show', $post->id);
+        return $temp;*/
     }
-
-
-/* Zastaraly kod, neni pouzity
-    public function commentFormSucceeded()
-    {
-        $postId = $this->getParameter('postId');
-        $this->Ffacade->addComment($postId);
-
-        $this->flashMessage('Děkuji za komentář', 'success');
-        $this->redirect('this');
-
-    }
-*/
-
-
 
 }
+

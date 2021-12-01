@@ -86,18 +86,16 @@ final class EditPresenter extends Nette\Application\UI\Presenter
 
     public function renderEdit(int $postId): void
     {
-        $post = $this->database
-            ->table('posts')
-            ->get($postId);
-    
-        if (!$post) {
+        $post = $this->Pfacade->getArticleDetails($postId);
+
+            if (!$post) {
             $this->error('Post not found');
         }
-    
+        
         $this->getComponent('postForm')
-            ->setDefaults($post->toArray());
-    
-        }
+            ->setDefaults($post[0]);
+        
+    }
 
 
     public function startup(): void
