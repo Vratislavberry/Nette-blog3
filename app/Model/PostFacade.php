@@ -77,7 +77,7 @@ final class PostFacade
 				]);
         }
     
-        $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
+        //$this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
         $this->redirect('Post:show', $values->postId);
 
 

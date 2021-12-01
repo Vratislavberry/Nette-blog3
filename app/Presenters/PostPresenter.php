@@ -46,6 +46,7 @@ final class PostPresenter extends Nette\Application\UI\Presenter
     }
 
 
+/* Zastaraly kod, neni pouzity
     public function commentFormSucceeded()
     {
         $postId = $this->getParameter('postId');
@@ -55,7 +56,7 @@ final class PostPresenter extends Nette\Application\UI\Presenter
         $this->redirect('this');
 
     }
-
+*/
 
 
 
