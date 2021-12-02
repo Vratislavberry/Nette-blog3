@@ -1,6 +1,18 @@
 <?php
 
-class ComponentForm extends Control implements ICommentFormFactory
+namespace App\components\CommentForm;
+
+use Nette\Application\UI\Control;
+
+
+interface IComponentFormFactory
+{
+    public function create(?int $id): CommentForm;
+}
+
+class ComponentForm extends Control implements IComponentFormFactory
+
+
 {
 
     private ?int $id;
@@ -11,7 +23,7 @@ class ComponentForm extends Control implements ICommentFormFactory
     }
 
 
-    public function createComponentForm()
+    public function create(?int $id): CommentForm
     {
         $form = new Form; // means Nette\Application\UI\Form
     
@@ -29,13 +41,8 @@ class ComponentForm extends Control implements ICommentFormFactory
         $form->addHidden('postId', $postId);
         
 
-        $form->onSuccess[] = [$this->Pfacade, 'addComment'];
+        //$form->onSuccess[] = [$this->Pfacade, 'addComment'];
     
         return $form;
     }
-}
-
-interface IComponentFormFactory
-{
-    public function create(?int $id): CommentForm;
 }
