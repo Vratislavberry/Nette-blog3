@@ -1,6 +1,6 @@
 <?php
 
-namespace App\components\CommentForm;
+namespace App\Components;
 
 use Nette\Application\UI\Control;
 
@@ -10,7 +10,7 @@ interface IComponentFormFactory
     public function create(?int $id): CommentForm;
 }
 
-class ComponentForm extends Control implements IComponentFormFactory
+class ComponentForm extends Control
 
 
 {

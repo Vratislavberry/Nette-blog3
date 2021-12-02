@@ -2,12 +2,13 @@
 
 namespace App\Presenters;
 
-use Nette;
+use Nette\Application\UI\Presenter;
 use Nette\Application\UI\Form;
 use App\Model\PostFacade;
 use App\Model\FormFacade;
+use App\Components\IComponentFormFactory;
 
-final class PostPresenter extends Nette\Application\UI\Presenter
+final class PostPresenter extends Presenter
 {
 	
     private PostFacade $Pfacade;
@@ -15,7 +16,11 @@ final class PostPresenter extends Nette\Application\UI\Presenter
 
     private ICommentFormFactory $commentFormFactory;
 
-    public function __construct(PostFacade $Pfacade, FormFacade $Ffacade, ICommentFormFactory $commentFormFactory)
+    public function __construct(
+        PostFacade $Pfacade, 
+        FormFacade $Ffacade, 
+        ICommentFormFactory $commentFormFactory
+        )
 	{
         // Připojení facade k databazi
 		$this->Pfacade = $Pfacade;

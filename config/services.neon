@@ -2,4 +2,5 @@ services:
 	- App\Router\RouterFactory::createRouter
 	- App\Model\PostFacade
 	- App\Model\FormFacade
+	- App\Components\IComponentFormFactory
 	
