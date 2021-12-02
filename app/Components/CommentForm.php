@@ -5,12 +5,9 @@ namespace App\Components;
 use Nette\Application\UI\Control;
 
 
-interface IComponentFormFactory
-{
-    public function create(?int $id): CommentForm;
-}
 
-class ComponentForm extends Control
+
+class CommentForm extends Control
 
 
 {
@@ -45,4 +42,9 @@ class ComponentForm extends Control
     
         return $form;
     }
+}
+
+interface ICommentFormFactory
+{
+    public function create(?int $id): CommentForm;
 }

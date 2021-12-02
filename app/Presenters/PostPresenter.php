@@ -6,7 +6,7 @@ use Nette\Application\UI\Presenter;
 use Nette\Application\UI\Form;
 use App\Model\PostFacade;
 use App\Model\FormFacade;
-use App\Components\IComponentFormFactory;
+use App\Components\ICommentFormFactory;
 
 final class PostPresenter extends Presenter
 {
