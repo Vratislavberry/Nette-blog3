@@ -40,7 +40,7 @@ final class PostPresenter extends Presenter
             $this->error('Stránka nebyla nalezena');
         }
         else{
-
+            bdump($articleDetails[0]);
             $this->template->post = $articleDetails[0];
 
             $this->template->comments = $articleDetails[1];

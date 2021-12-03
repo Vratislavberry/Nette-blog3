@@ -77,11 +77,16 @@ final class EditPresenter extends Nette\Application\UI\Presenter
         
             \Tracy\Debugger::barDump($form);
             \Tracy\Debugger::barDump($values);
-            $this->Pfacade->addComment($values);
+            $this->Pfacade->addArticle($values);
             $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
-            $this->redirect('Post:show', $values->postId);
+            $this->redirect('Homepage:');
+            //$this->redirect('Post:show', $values->postId);
             
         };
+    }
+
+    public function actionEdit($id){
+        echo "ahoj";
     }
 
 

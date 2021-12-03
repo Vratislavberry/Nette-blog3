@@ -5,8 +5,8 @@
 
 <p>{$post->content}</p>
 
-
-    <a class="tlacitko" n:href="Edit:edit $post->id" n:if="$user->isLoggedIn()">Upravit článek</a>
+{dump $post->id}
+    <a class="tlacitko" href={plink Edit:edit $post->id} n:if="$user->isLoggedIn()">Upravit článek</a>
 
 
 <p class="datum">{$post->created_at|date:'j F, Y'}</p>
