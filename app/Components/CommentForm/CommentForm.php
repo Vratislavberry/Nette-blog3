@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components;
+namespace App\Components\CommentForm;
 
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;

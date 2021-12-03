@@ -1,5 +1,5 @@
 services:
-	- App\Components\ICommentFormFactory
+	- App\Components\CommentForm\ICommentFormFactory
 	- App\Router\RouterFactory::createRouter
 	- App\Model\PostFacade
 	- App\Model\FormFacade

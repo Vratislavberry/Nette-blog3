@@ -6,8 +6,8 @@ use Nette\Application\UI\Presenter;
 use Nette\Application\UI\Form;
 use App\Model\PostFacade;
 use App\Model\FormFacade;
-use App\Components\ICommentFormFactory;
-use App\Components\CommentForm;
+use App\Components\CommentForm\ICommentFormFactory;
+use App\Components\CommentForm\CommentForm;
 use Nette;
 
 final class PostPresenter extends Presenter
