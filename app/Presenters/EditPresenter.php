@@ -5,24 +5,28 @@ use Nette;
 use Nette\Application\UI\Form;
 use App\Model\PostFacade;
 use App\Model\FormFacade;
+use App\Components\NewArticleForm\INewArticleFormFactory;
+use App\Components\NewArticleForm\CommentForm;
 
 final class EditPresenter extends Nette\Application\UI\Presenter
 {
     //private Nette\Database\Explorer $database;
     private PostFacade $Pfacade;
     private FormFacade $Ffacade;
+    private INewArticleFormFactory $newArticleForm;
 
-	public function __construct(PostFacade $Pfacade, FormFacade $Ffacade)
+	public function __construct(PostFacade $Pfacade, FormFacade $Ffacade, INewArticleFormFactory $newArticleForm)
 	{
         // Připojení facade k databazi
 
 		//$this->database = $database;
         $this->Pfacade = $Pfacade;
         $this->Ffacade = $Ffacade;
+        $this->newArticleForm = $newArticleForm;
 
 	}
 
-
+/*
 
     public function createComponentPostForm(): Form
     {
@@ -48,7 +52,7 @@ final class EditPresenter extends Nette\Application\UI\Presenter
             ->setDefaults($post[0]);
         
     }
-
+*/
 
     public function startup(): void
     {
