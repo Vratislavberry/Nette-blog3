@@ -64,6 +64,25 @@ final class EditPresenter extends Nette\Application\UI\Presenter
     }
     
 
+    public function createComponentNewArticleForm()
+    {
+    $service = $this->newArticleForm->create($this->getParameter("postId"),$this->myCallback());
+        
+        return $service;
+    }
+
+    public function myCallback(): callable
+    {
+        return function(Form $form, $values) {
+        
+            \Tracy\Debugger::barDump($form);
+            \Tracy\Debugger::barDump($values);
+            $this->Pfacade->addComment($values);
+            $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
+            $this->redirect('Post:show', $values->postId);
+            
+        };
+    }
 
 
 }
