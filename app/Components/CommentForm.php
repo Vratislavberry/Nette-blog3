@@ -4,21 +4,14 @@ namespace App\Components;
 
 use Nette\Application\UI\Control;
 
-
-
-
-class CommentForm extends Control
-
-
+class CommentForm extends Control implements ICommentFormFactory
 {
-
     private ?int $id;
 
     public function __construct(?int $id)
     {
         $this->id = $id;
     }
-
 
     public function create(?int $id): CommentForm
     {
@@ -46,5 +39,5 @@ class CommentForm extends Control
 
 interface ICommentFormFactory
 {
-    public function create(?int $id): CommentForm;
+    public function create(?int $id/*, callback $callback*/): CommentForm;
 }

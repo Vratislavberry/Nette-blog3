@@ -7,6 +7,8 @@ use Nette\Application\UI\Form;
 use App\Model\PostFacade;
 use App\Model\FormFacade;
 use App\Components\ICommentFormFactory;
+use App\Components\CommentForm;
+use Nette;
 
 final class PostPresenter extends Presenter
 {
@@ -43,31 +45,35 @@ final class PostPresenter extends Presenter
 
             $this->template->comments = $articleDetails[1];
         }
-
-        
-        
-
-
     }
 
     public function createComponentCommentForm()
     {
-
-        $service = $this->commentFormFactory->create($this->getParameter("postId"));
-
-        $service['form']->onSuccess[] = function(){
+        /** var CommentForm $service */
+    $service = $this->commentFormFactory->create($this->getParameter("postId"),$this->myCallback());
+        $service->onSuccess = function(){
             $this->presenter->redirect('Default:default');
         };
+        
         $service->getComponent('form');
 
+        
         return $service;
-
+        
+        
 
         //return $this->Ffacade->getCommentForm($this->getParameter("postId"));
         /*$temp = $this->Ffacade->getCommentForm($this->getParameter("postId"));
         $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
         $this->redirect('Post:show', $post->id);
         return $temp;*/
+    }
+
+    public function myCallback(): callback
+    {
+        return function() {
+
+        };
     }
 
 }
