@@ -47,7 +47,6 @@ final class PostFacade
 
 	public function addComment(\stdClass $values): void
     {
-
         $this->database->table('comments')->insert([
             'post_id' => $values->postId,
             'name' => $values->name,

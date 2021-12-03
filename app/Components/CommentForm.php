@@ -3,17 +3,20 @@
 namespace App\Components;
 
 use Nette\Application\UI\Control;
+use Nette\Application\UI\Form;
 
-class CommentForm extends Control implements ICommentFormFactory
+class CommentForm extends Control //implements ICommentFormFactory
 {
     private ?int $id;
+    private $callback;
 
-    public function __construct(?int $id)
+    public function __construct(?int $id, ?callable $callback)
     {
         $this->id = $id;
+        $this->callback = $callback;
     }
 
-    public function create(?int $id): CommentForm
+    public function createComponentForm()  
     {
         $form = new Form; // means Nette\Application\UI\Form
     
@@ -28,16 +31,23 @@ class CommentForm extends Control implements ICommentFormFactory
         $form->addSubmit('send', 'Publikovat komentář');
 
         
-        $form->addHidden('postId', $postId);
+        $form->addHidden('postId', $this->id);
         
-
-        //$form->onSuccess[] = [$this->Pfacade, 'addComment'];
+        //call_user_func('callback');o
+        $form->onSuccess = [$this->callback];
     
         return $form;
     }
+
+    public function render($params = [ ]) 
+    {
+        $this->template->setFile(__DIR__ . '/CommentForm.latte');
+        $this->template->render();
+    }
+
 }
 
 interface ICommentFormFactory
 {
-    public function create(?int $id/*, callback $callback*/): CommentForm;
+    public function create(?int $id, ?callable $callback): CommentForm;
 }

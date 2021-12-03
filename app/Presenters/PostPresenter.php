@@ -51,11 +51,11 @@ final class PostPresenter extends Presenter
     {
         /** var CommentForm $service */
     $service = $this->commentFormFactory->create($this->getParameter("postId"),$this->myCallback());
-        $service->onSuccess = function(){
+        /*$service->onSuccess = function(){
             $this->presenter->redirect('Default:default');
-        };
+        };*/
         
-        $service->getComponent('form');
+        //$service->getComponent('form');
 
         
         return $service;
@@ -69,12 +69,19 @@ final class PostPresenter extends Presenter
         return $temp;*/
     }
 
-    public function myCallback(): callback
+    public function myCallback(): callable
     {
-        return function() {
-
+        return function(Form $form, $values) {
+        
+            \Tracy\Debugger::barDump($form);
+            \Tracy\Debugger::barDump($values);
+            $this->Pfacade->addComment($values);
+            $this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
+            $this->redirect('Post:show', $values->postId);
+            
         };
     }
 
 }
 // Interface = šablona pro třídy
+;;
